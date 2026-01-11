@@ -1,9 +1,10 @@
 <script setup>
 import { ref, computed } from 'vue'
 import { COLUMNS } from 'src/constants'
+import PostsFilter from 'src/components/PostsFilter.vue'
 
 // ===* PROPS *===
-const props = defineProps({
+defineProps({
   posts: Array,
   loading: Boolean,
 })
@@ -13,18 +14,48 @@ const pagination = ref({
   page: 1,
   rowsPerPage: 20,
 })
+const filteredPosts = ref([])
+const hasFilters = ref(false)
+const filterRef = ref(null)
 
 // ===* COMPUTED *===
-const pagesNumber = computed(() => Math.ceil(props.posts.length / pagination.value.rowsPerPage))
+const pagesNumber = computed(() =>
+  Math.ceil(filteredPosts.value.length / pagination.value.rowsPerPage),
+)
+
+// ===* METHODS *===
+const handleFilter = (filtered) => {
+  filteredPosts.value = filtered
+  pagination.value.page = 1
+}
+const handleHasFilters = (value) => {
+  hasFilters.value = value
+}
+
+const clearAllFilters = () => {
+  filterRef.value?.resetFilters()
+}
 </script>
 
 <template>
   <div>
+    <!-- filter -->
+    <div class="q-mb-md row items-end q-gutter-lg">
+      <PostsFilter
+        ref="filterRef"
+        :posts="posts"
+        @filter="handleFilter"
+        @has-filters="handleHasFilters"
+      />
+      <q-btn v-if="hasFilters" @click="clearAllFilters">Clear All Filters</q-btn>
+    </div>
+
+    <!-- table -->
     <q-table
       flat
       bordered
       row-key="id"
-      :rows="posts"
+      :rows="filteredPosts"
       :columns="COLUMNS"
       :grid="$q.screen.lt.md"
       :loading="loading"
@@ -32,6 +63,7 @@ const pagesNumber = computed(() => Math.ceil(props.posts.length / pagination.val
       hide-pagination
     >
       <template #body-cell-actions="{ row }">
+        <!-- action cell -->
         <q-td align="right">
           <q-btn flat icon="edit" @click="$emit('edit', row)" />
           <q-btn flat icon="delete" color="negative" @click="$emit('delete', row.id)" />
