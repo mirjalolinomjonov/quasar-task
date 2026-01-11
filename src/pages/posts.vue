@@ -54,7 +54,7 @@ const submitForm = async (formData) => {
       $q.notify('Post updated')
     } else {
       const { data } = await createPost(formData)
-      posts.value.unshift({ ...data, id: Date.now() })
+      posts.value.unshift({ ...data, id: Date.now(), userId: 26 })
       $q.notify('Post created')
     }
   } catch (error) {
