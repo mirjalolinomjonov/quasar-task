@@ -1,3 +1,13 @@
 {
-  "routes": [{ "handle": "filesystem" }, { "src": "/.*", "dest": "/" }]
+  "routes": [{ "handle": "filesystem" }, { "src": "/.*", "dest": "/" }],
+  "buildCommand": "quasar build",
+  "outputDirectory": "dist/spa",
+  "devCommand": "quasar dev",
+  "installCommand": "npm install",
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ]
 }
