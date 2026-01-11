@@ -19,7 +19,10 @@ const submitting = ref(false)
 const isEdit = computed(() => !!props.post)
 const dialogValue = computed({
   get: () => props.modelValue,
-  set: (value) => emit('update:modelValue', value),
+  set: (value) => {
+    emit('update:modelValue', value)
+    !value && reset()
+  },
 })
 
 watch(
