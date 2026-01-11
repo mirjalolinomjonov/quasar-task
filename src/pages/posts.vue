@@ -74,7 +74,7 @@ const confirmDelete = async () => {
   try {
     await deletePost(deleteId.value)
     posts.value = posts.value.filter((p) => p.id !== deleteId.value)
-    $q.notify({ type: 'negative', message: 'Post deleted' })
+    $q.notify('Post deleted')
   } catch (error) {
     $q.notify({ type: 'negative', message: error.message || 'Failed to delete post' })
   } finally {
@@ -94,7 +94,7 @@ onMounted(fetchPosts)
         <div class="text-caption text-grey">Lorem ipsum dolor sit amet.</div>
       </div>
 
-      <q-btn color="primary" icon="add" label="New Post" @click="openCreate" />
+      <q-btn :disable="loading" color="primary" icon="add" label="New Post" @click="openCreate" />
     </div>
     <PostTable
       :posts="posts"
