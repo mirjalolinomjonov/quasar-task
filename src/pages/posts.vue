@@ -24,7 +24,6 @@ const fetchPosts = async () => {
   loading.value = true
   try {
     const { data } = await getPosts()
-    console.log('data = ', data)
 
     // posts.value = data.slice(0, 10)
     posts.value = data
