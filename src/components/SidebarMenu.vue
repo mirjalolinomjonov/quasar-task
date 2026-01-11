@@ -11,7 +11,7 @@ const menuList = [
     <!-- header -->
     <q-item-label header>
       <q-avatar size="32px">
-        <img src="/public/icons/favicon-32x32.png" />
+        <q-icon name="admin_panel_settings" size="32px" color="blue-grey-10" />
       </q-avatar>
       Admin Panel
     </q-item-label>
