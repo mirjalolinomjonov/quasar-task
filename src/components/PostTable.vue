@@ -69,6 +69,30 @@ const clearAllFilters = () => {
           <q-btn flat icon="delete" color="negative" @click="$emit('delete', row.id)" />
         </q-td>
       </template>
+      <!-- Grid (responsive) mode uchun -->
+      <template #item="props">
+        <div class="q-pa-xs col-xs-12 col-sm-6 col-md-4">
+          <q-card>
+            <q-card-section>
+              <div v-for="col in props.cols" :key="col.name">
+                <div v-if="col.name !== 'actions'" class="text-caption text-grey">
+                  {{ col.label }}
+                </div>
+                <div v-if="col.name !== 'actions'" class="q-mb-sm">
+                  {{ col.value }}
+                </div>
+              </div>
+            </q-card-section>
+
+            <q-separator />
+
+            <q-card-actions align="right">
+              <q-btn flat icon="edit" @click="$emit('edit', props.row)" />
+              <q-btn flat icon="delete" color="negative" @click="$emit('delete', props.row.id)" />
+            </q-card-actions>
+          </q-card>
+        </div>
+      </template>
 
       <template #loading>
         <q-inner-loading showing>
