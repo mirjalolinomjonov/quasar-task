@@ -9,13 +9,13 @@ const menuList = [
 <template>
   <q-list style="height: 100dvh; display: flex; flex-direction: column">
     <!-- header -->
-    <q-item-label header>
+    <q-item-label style="height: 50px; padding: 8px 16px">
       <q-avatar size="32px">
         <q-icon name="admin_panel_settings" size="32px" color="blue-grey-10" />
       </q-avatar>
       Admin Panel
     </q-item-label>
-
+    <q-separator />
     <!-- menu top -->
     <q-item
       v-for="(menu, index) in menuList"
