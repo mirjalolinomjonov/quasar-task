@@ -51,7 +51,7 @@ const reset = () => Object.assign(form, { title: '', body: '' })
 
 <template>
   <q-dialog v-model="dialogValue">
-    <q-card style="min-width: 500px">
+    <q-card style="width: 500px">
       <q-card-section>
         <div class="text-h6">
           {{ isEdit ? 'Edit Post' : 'Create Post' }}
